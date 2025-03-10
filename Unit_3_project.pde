@@ -32,7 +32,7 @@ void draw() {
   fill(lightGrey);
   rect(0,0,200,600);
   
-  tactile(50,480,100);
+  tactile(50,480,100,100);
   if(smileyOn) {
   fill(lightGrey);
   } else { fill(white);
@@ -43,9 +43,22 @@ void draw() {
   strokeWeight(2);
   stroke(black);
   fill(darkGrey);
+  tactile(75,10,50,30);
   rect(75,10,50,30);
+  fill(black);
+  text("NEW", 89, 30);
+  
+  fill(darkGrey);
+  tactile(10,10,50,30);
   rect(10,10,50,30);
+  fill(black);
+  text("SAVE",23,30);
+  
+  fill(darkGrey);
+  tactile(140,10,50,30);
   rect(140,10,50,30);
+  fill(black);
+  text("LOAD", 151,30);
  
   
   tactile(50,75,20);
@@ -87,6 +100,9 @@ void draw() {
   stroke(black);
   fill(selectedColor);
   square(125,410,50);
+  
+ 
+    
 }
 
 void tactile (int x, int y, int r) {
@@ -94,6 +110,14 @@ void tactile (int x, int y, int r) {
   stroke(white);
   } else {
   stroke(black);
+  }
+}
+
+void tactile (int x, int y, int w, int h) {
+  if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h) {
+    stroke(white);
+  } else {
+    stroke(black);
   }
 }
   
@@ -143,6 +167,21 @@ void mouseReleased() {
   
   if ( dist(50,435,mouseX,mouseY) < 20) {
     selectedColor = black;
+  }
+   if (mouseX > 75 && mouseX < 125 && mouseY > 10 && mouseY < 40) {
+     stroke(255);
+     fill(255);
+     rect(200,0,600,600); 
+   }
+   if(mouseX > 10 && mouseX < 60 && mouseY > 10 && mouseY < 40) {
+     selectOutput("Choose a name for your new image file", "saveImage");
+   }
+}
+
+void saveImage(File f) {
+  if (f != null) {
+    PImage canvas = get(201,1,width-201, height-1);
+    canvas.save(f.getAbsolutePath());
   }
 }
 
